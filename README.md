@@ -1,2 +1,0 @@
-# CodiceAnalisiGRAAL
- Codice di analisi
