@@ -412,9 +412,8 @@ public :
    //Pre dichiarazoni di funzioni aggiunte post generazione del file
    virtual vector<string>     GetNames(string dir_name, bool debug = 0);
    virtual void     process(TTree *alb, string root_file);
-   virtual TTree    *InitializeAll();
+   virtual vector<TTree*>    InitializeAll();
    virtual void     ProcessAll();
-   virtual void     ProcessAllOneByOne();
    virtual void     CreateFolder(string f_path, bool debug = 0);
    virtual void     Clean();
    virtual void     Setter();
