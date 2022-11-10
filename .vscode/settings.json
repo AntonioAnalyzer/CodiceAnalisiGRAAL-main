@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "Analysis.C": "cpp"
+        "Analysis.C": "cpp",
+        "cutP1998_uv.C": "cpp",
+        "Loader.C": "cpp"
     }
 }

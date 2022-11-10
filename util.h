@@ -25,59 +25,47 @@ std::vector<std::string> Analysis::GetNames(string dir_name, bool debug = 0){
 
 //Funzione che ritorna un TTree con più file run....root
 vector<TTree*> Analysis::InitializeAll(){
-  vector<string> directories = Analysis::GetNames("..");        //qui creo un vettore di stringe chiamato "directories" dalla funzione GetNames
-  cout<<"Scegli la cartella da analizzare (<0 tutte): "<<endl;
+  //qui creo un vettore di stringe chiamato "directories" dalla funzione GetNames
+  vector<string> directories = Analysis::GetNames("..");
+  cout<<"Le cartelle che analizzerò sono: "<<endl;
 
   //questo for serve solo a stampare a schermo tutte le cartelle
   for(int i = 0; i < directories.size(); i++){
     if(directories[i].find("data") != std::string::npos){
-      cout<<"["<<i<<"] "<<directories[i]<<endl;
+      // cout<<"["<<i<<"] "
+      cout<<directories[i]<<endl;
     }
   }
-
+  cout<<"------------"<<endl;
+  
   //Inizio del codice che aggancia tutte i file .root
   vector<TTree*> alberi;
+ 
+  for(auto dir_names : directories){
+    TChain * chain = new TChain("h70","");
+    if(dir_names.find("data") != std::string::npos){ //cerca solo le cartelle che iniziano con data
+      string inside_dir = "../" + dir_names + "/";   //ricostruiamo il path
 
-  bool end = true;
-  int cont=0;
-  while(end){
-    int chosen_dir;
-    cout<<"Inserisci [0 stop]: ";
-    cin>>chosen_dir;
+      vector<string> files = GetNames(inside_dir);   //otteniamo i nomi dei file dentro la cartella
 
-    //caso in cui vogliamo analizzare tutte le cartelle senza doverle selezionare una per una
-    if(chosen_dir < 0){
-      for(auto dir_names : directories){
-        TChain * chain = new TChain("h70","");
-        if(dir_names.find("data") != std::string::npos){ //cerca solo le cartelle che iniziano con data
-          cout<<dir_names<<endl;
-          string inside_dir = "../" + dir_names + "/";   //ricostruiamo il path
+      //ciclo che cerca i file .root dentro la cartella "inside_dir"
+      for(auto file_names : files){
+        if(file_names.find("run") != std::string::npos && file_names.find(".root") != std::string::npos && file_names.find(".gz") == std::string::npos && file_names.find("_analizzato") == std::string::npos){ //condizioni per ottenere solo i file voluti
+          string file_path = inside_dir + file_names; //ricostruiamo il path
 
-          vector<string> files = GetNames(inside_dir);   //otteniamo i nomi dei file dentro la cartella
-
-          //ciclo che cerca i file .root dentro la cartella "inside_dir"
-          for(auto file_names : files){
-            if(file_names.find("run") != std::string::npos && file_names.find(".root") != std::string::npos && file_names.find(".gz") == std::string::npos && file_names.find("_analizzato") == std::string::npos){ //condizioni per ottenere solo i file voluti
-              string file_path = inside_dir + file_names; //ricostruiamo il path
-
-              chain->Add(file_path.c_str());  //mettiamo il file root dentro una TChain
-            }
-            else if(file_names.find(".gz") != std::string::npos){ //caso in cui trova dei file compressi
-              cout<<"Non sto analizzando il file: "<<file_names<<" controllare di averlo estratto!!!"<<endl;
-            }
-          }
-
-        //convertiamo la chain in un TTree
-        TTree *tree;
-        tree = chain;
-        string titolo = dir_names + "_analizzato";
-        tree->SetTitle(titolo.c_str());
-        alberi.push_back(tree);
+          chain->Add(file_path.c_str());  //mettiamo il file root dentro una TChain
+        }
+        else if(file_names.find(".gz") != std::string::npos){ //caso in cui trova dei file compressi
+          cout<<"Non sto analizzando il file: "<<file_names<<" controllare di averlo estratto!!!"<<endl;
         }
       }
 
-      end = false;
-      break;
+      //convertiamo la chain in un TTree
+      TTree *tree;
+      tree = chain;
+      string titolo = dir_names.substr(5,dir_names.size()) + "_analizzato";
+      tree->SetTitle(titolo.c_str());
+      alberi.push_back(tree);
     }
   }
 

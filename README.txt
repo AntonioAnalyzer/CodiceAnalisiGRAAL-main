@@ -7,6 +7,13 @@ Utilizzo:
     i) Se si sceglie la prima appariranno delle istruzioni a schermo, seguirle
 
 ################################################################################
+Codice Analisi GRAAL v1.04
+Changeling:
+-adesso dopo aver analizzato una cartella crea un file con <nome_cartella>_analizzato.root
+-tolta la funzione per analizzare i file uno per uno
+-aggiunti vari commenti per capire meglio il codice
+
+################################################################################
 Codice Analisi GRAAL v1.03
 Changelog:
 -aggiunti vari commenti alle funzioni

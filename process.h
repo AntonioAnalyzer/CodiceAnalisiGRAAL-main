@@ -15,6 +15,7 @@ void Analysis::process(TTree *alb, string root_file){
   double RMN    = 0.9395654133;
   double CLIGHT = 29979245800.; //! cm/sec
   double DIST_WALL;
+  double percent = 10.0;
 
   TCutG *ProtonCentrCut   = myProtonCentrCut();
   TCutG *PionCentrCut     = myPionCentrCut();
@@ -39,8 +40,7 @@ void Analysis::process(TTree *alb, string root_file){
   vector<pair<double,double> > fphotonangles;
   // vector<TLorentzVector> fproton;
   vector<TLorentzVector> fneutron;
-  // gInterpreter->GenerateDictionary("vector< vector<TLorentzVector> >", "vector");
-
+  
   TLorentzVector beam;
 
   tree->Branch("beam",    "TLorentzVector", &beam);
@@ -55,13 +55,9 @@ void Analysis::process(TTree *alb, string root_file){
   tree->Branch("pionangles",    &pionangles);
   tree->Branch("fphotonangles", &fphotonangles);
 
-
   if (fChain == 0) return;
   Long64_t nentries = fChain->GetEntriesFast();
   Long64_t nbytes = 0, nb = 0;
-
-  double percent = 10.0;
-
 
   for (Long64_t jentry=0; jentry<nentries; jentry++) {
     Long64_t ientry = LoadTree(jentry);
@@ -81,19 +77,20 @@ void Analysis::process(TTree *alb, string root_file){
     idrun = Idrun;
     idevt = Idevt;
     ipol  = int(Ipol);
-    //if(Ipol=='1')cout<<"ciao\n";
-    int fpro=0;
-    int cpro =0;
+
+    int fpro = 0;
+    int cpro = 0;
 
     beam.SetPxPyPzE(0.,0.,Eg_tag_strip[0],Eg_tag_strip[0]);
 
+    //fa un ciclo su tutte le traccie rivelate al centro
     for(int i=0; i<Nass_3; i++) {
       if(Itipo_track[i]==11) {
         TLorentzVector CandidatePhoton;
         CandidatePhoton.SetPxPyPzE(Eclusc_track[i]*sin(Thet_centr_track[i]/180.*M_PI)*cos(Phi_centr_track[i]/180.*M_PI),Eclusc_track[i]*sin(Thet_centr_track[i]/180.*M_PI)*sin(Phi_centr_track[i]/180.*M_PI),Eclusc_track[i]*cos(Thet_centr_track[i]/180.*M_PI),Eclusc_track[i]);
         cphoton.push_back(CandidatePhoton);
       }
-      else if(Itipo_track[i]==13||Itipo_track[i]==14) {
+      if(Itipo_track[i]==13||Itipo_track[i]==14) {
         protondxE->Fill(Eclusc_track[i], Dedx_track[i]);
         if(ProtonCentrCut->IsInside(Eclusc_track[i], Dedx_track[i])) {
           protondxEsoloPro->Fill(Eclusc_track[i], Dedx_track[i]);
@@ -105,7 +102,7 @@ void Analysis::process(TTree *alb, string root_file){
           proton.push_back(CandidateProton);
           cpro++;
         }
-        else if(PionCentrCut->IsInside(Eclusc_track[i], Dedx_track[i])) {
+        if(PionCentrCut->IsInside(Eclusc_track[i], Dedx_track[i])) {
           protondxEsoloPio->Fill(Eclusc_track[i], Dedx_track[i]);
           pair<double,double> tempangle;
           tempangle.first=Thet_centr_track[i];
@@ -114,8 +111,8 @@ void Analysis::process(TTree *alb, string root_file){
         }
       }
     }
+    //ciclo su tutte le traccie delle particelle in avanti
     for(int i =0; i< Nparf; i++) {
-      //cicla su tutte le particelle in avanti
       //cout<<i<<"  "<<Nparf<<"----"<< int(Index_trf[Nparf])<<endl;
       //     cout<< int(Iass_trf[Index_trf[Nparf]])<<endl;//ci aspettiamo numeri pari a 1 - 7
       //
@@ -147,7 +144,7 @@ void Analysis::process(TTree *alb, string root_file){
         }
 
       }
-      else if(index!=1) {//particelle cariche, quelle per le quali tutti i rivelatori sensibili ai carichi hanno sparato
+      if(index!=1) {//particelle cariche, quelle per le quali tutti i rivelatori sensibili ai carichi hanno sparato
 
         // if(index==6||index==7){//particelle cariche, quelle per le quali tutti i rivelatori sensibili ai carichi hanno sparato
 
@@ -176,7 +173,7 @@ void Analysis::process(TTree *alb, string root_file){
           }
 
         }
-        else if(PionForwCut->IsInside(Tof_trf[i], De_trf[i])) { //regno dei pioni in avanti
+        if(PionForwCut->IsInside(Tof_trf[i], De_trf[i])) { //regno dei pioni in avanti
           pair<double,double> tempangle;
           tempangle.first=Theta_trf[i];
           tempangle.second=Phi_trf[i];
