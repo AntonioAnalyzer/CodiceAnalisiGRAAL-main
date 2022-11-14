@@ -1,14 +1,20 @@
 Utilizzo:
--per utilizzare lo script bisogna:
+-per utilizzare gli scripts bisogna:
+  0) mettere la cartella con i codici "accanto" alle cartelle con i dati
   1) rinominare le cartelle da analizzare con un prefisso "data_"
   2) caricare la macro su root con ".L Analysis.C"
   3) istanziare la classe "Analysis o"
-  4) utilizzare una delle due funzioni principali: "o.ProcessAll()" OPPURE "o.ProcessAllOneByOne()"
-    i) Se si sceglie la prima appariranno delle istruzioni a schermo, seguirle
+  4) utilizzare la funzione ProcessAll ("o.ProcessAll()")
+
+################################################################################
+Codice Analisi GRAAL v1.05
+Changelog:
+-adesso il codice sceglie il giusto taglio in base alla cartella scelta
+-non funziona più la compilazione del Loader.C
 
 ################################################################################
 Codice Analisi GRAAL v1.04
-Changeling:
+Changelog:
 -adesso dopo aver analizzato una cartella crea un file con <nome_cartella>_analizzato.root
 -tolta la funzione per analizzare i file uno per uno
 -aggiunti vari commenti per capire meglio il codice
