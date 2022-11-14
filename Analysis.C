@@ -28,7 +28,6 @@ void Analysis::ProcessAll(){
 
   //prendiamo il tempo prima dell'inizio dell'analisi dei dati
   auto start = std::chrono::steady_clock::now();
-  cout<<"Sto analizzando... ";
 
   //per ogni TTRee nel vettore (quindi per ogni cartella) processiamo i dati
   for(auto albero : alberi){
@@ -36,10 +35,12 @@ void Analysis::ProcessAll(){
     string titolo(albero->GetTitle());
 
     //formiamo il path del file
-    string nome_file = "../" + titolo + ".root";
+    string nome_file = "../" + titolo + "_analizzato.root";
+
+    cout<<"Sto analizzando la cartella "<<titolo<<"..."<<endl;
 
     //avviamo l'analisi
-    process(albero, nome_file.c_str());
+    process(albero, nome_file.c_str(), titolo);
   }
   
   //stampiamo il tempo trascorso da quando ha iniziato a finire di analizzare i file

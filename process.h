@@ -5,7 +5,7 @@
 ///////////////////////////////////////////////////
 
 
-void Analysis::process(TTree *alb, string root_file){
+void Analysis::process(TTree *alb, string root_file, string cartella){
 
   //Funzione di inizializzazione dell'albero passato
   Analysis::Init(alb);
@@ -17,7 +17,7 @@ void Analysis::process(TTree *alb, string root_file){
   double DIST_WALL;
   double percent = 10.0;
 
-  TCutG *ProtonCentrCut   = myProtonCentrCut();
+  TCutG *ProtonCentrCut   = myProtonCentrCut(cartella);
   TCutG *PionCentrCut     = myPionCentrCut();
   TCutG *ProtonForwCut    = myProtonForwCut();
   TCutG *PionForwCut      = myPionForwCut();

@@ -1,6 +1,6 @@
-{
-//========= Macro generated from object: CUTG/Graph
-//========= by ROOT version6.22/08
+TCutG *myProtonCentrCut_2002_vis2(){ 
+   // cout<<"Il taglio 2002_vis2 è stato caricato"<<endl;
+
    
    TCutG *cutg = new TCutG("CUTG",29);
    cutg->SetVarX("Tof_trf[0]");
@@ -36,5 +36,6 @@
    cutg->SetPoint(26,19.7429,17.366);
    cutg->SetPoint(27,12.8435,7.82886);
    cutg->SetPoint(28,11.6523,6.61876);
-   cutg->Draw("");
+
+   return cutg;
 }

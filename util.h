@@ -63,7 +63,7 @@ vector<TTree*> Analysis::InitializeAll(){
       //convertiamo la chain in un TTree
       TTree *tree;
       tree = chain;
-      string titolo = dir_names.substr(5,dir_names.size()) + "_analizzato";
+      string titolo = dir_names.substr(5,dir_names.size());
       tree->SetTitle(titolo.c_str());
       alberi.push_back(tree);
     }
@@ -118,10 +118,10 @@ void Analysis::CreateFolder(string f_path, bool debug = 0){
 void Analysis::Setter(){
 
   cout<<"Setto l'enviroment per analizzare i dati..."<<endl;
-  gErrorIgnoreLevel = 6001;
-  gSystem->RedirectOutput("/dev/null");
+  // gErrorIgnoreLevel = 6001;
+  // gSystem->RedirectOutput("/dev/null");
   gROOT->ProcessLine(".L Loader.C+");
-  gSystem->RedirectOutput(0,0);
+  // gSystem->RedirectOutput(0,0);
 
 }
 

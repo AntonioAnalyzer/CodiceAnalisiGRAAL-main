@@ -411,7 +411,7 @@ public :
 
    //Pre dichiarazoni di funzioni aggiunte post generazione del file
    virtual vector<string>     GetNames(string dir_name, bool debug = 0);
-   virtual void     process(TTree *alb, string root_file);
+   virtual void     process(TTree *alb, string root_file, string cartella);
    virtual vector<TTree*>    InitializeAll();
    virtual void     ProcessAll();
    virtual void     CreateFolder(string f_path, bool debug = 0);
@@ -427,37 +427,7 @@ public :
 //funzione che in genere si usa per aggangiare e inizializzare il TTree
 //non utilizzata
 Analysis::Analysis(TTree *tree) : fChain(0){
-// // if parameter tree is not specified (or zero), connect the file
-// // used to generate this class and read the Tree.
-//    if (tree == 0) {
-//     //  TFile *f = (TFile*)gROOT->GetListOfFiles()->FindObject("run1325.root");
-//     //  if (!f || !f->IsOpen()) {
-//            TChain * chain = new TChain("h70","");
-//             vector<string> directories = GetNames(".",1);
-//             for(auto dir_names : directories){
-//               if(dir_names.find("data") != std::string::npos){
-//                 // cout<<dir_names<<endl;
-//                 string inside_dir = "./" + dir_names + "/";
-//                 vector<string> files = GetNames(inside_dir,1);
-//                 for(auto file_names : files){
-//                   if(file_names.find("run") != std::string::npos && file_names.find(".root") != std::string::npos && file_names.find(".gz") == std::string::npos){
-//                     // cout<<file_names<<endl;
-//                     string file_path = inside_dir + file_names;
-//                     chain->Add(file_path.c_str());
-//                   }
-//                   else if(file_names.find(".gz") != std::string::npos){
-//                     cout<<"Non sto analizzando il file: "<<file_names<<" controllare di averlo estratto!!!"<<endl;
-//                   }
-//                 }
-//               }
-//             }
-//
-//               tree = chain;
-//       //}
-//     //  f->GetObject("h70",tree);
-//
-//    }
-//    Init(tree);
+
 }
 
 Analysis::~Analysis()

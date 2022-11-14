@@ -3,81 +3,53 @@
 // di progessing dei dati
 ///////////////////////////////////////////////////
 
-
 #include "TCutG.h"
-
-TCutG *myProtonCentrCut(){
-  TCutG *ProtonCentrCut = new TCutG("myProtonCentrCut",36);
-  ProtonCentrCut->SetVarX("");
-  ProtonCentrCut->SetVarY("");
-  ProtonCentrCut->SetNameTitle("ProtonCentrCut");
-  ProtonCentrCut->SetFillStyle(1000);
-  // ProtonCentrCut->SetPoint(0,0.0279198,10.105);
-  // ProtonCentrCut->SetPoint(1,0.0507851,7.84664);
-  // ProtonCentrCut->SetPoint(2,0.0820745,6.06092);
-  // ProtonCentrCut->SetPoint(3,0.114567,4.95798);
-  // ProtonCentrCut->SetPoint(4,0.145857,4.32773);
-  // ProtonCentrCut->SetPoint(5,0.190384,3.69748);
-  // ProtonCentrCut->SetPoint(6,0.228894,3.17227);
-  // ProtonCentrCut->SetPoint(7,0.266201,3.06723);
-  // ProtonCentrCut->SetPoint(8,0.310728,3.06723);
-  // ProtonCentrCut->SetPoint(9,0.375713,2.96218);
-  // ProtonCentrCut->SetPoint(10,0.414223,2.96218);
-  // ProtonCentrCut->SetPoint(11,0.458751,2.85714);
-  // ProtonCentrCut->SetPoint(12,0.52133,2.85714);
-  // ProtonCentrCut->SetPoint(13,0.536974,3.53992);
-  // ProtonCentrCut->SetPoint(14,0.434682,3.69748);
-  // ProtonCentrCut->SetPoint(15,0.375713,3.69748);
-  // ProtonCentrCut->SetPoint(16,0.286659,4.85294);
-  // ProtonCentrCut->SetPoint(17,0.22047,5.79832);
-  // ProtonCentrCut->SetPoint(18,0.14706,7.42647);
-  // ProtonCentrCut->SetPoint(19,0.100126,9.42227);
-  // ProtonCentrCut->SetPoint(20,0.0604126,11.6807);
-  // ProtonCentrCut->SetPoint(21,0.0435645,13.8866);
-  // ProtonCentrCut->SetPoint(22,0.0291232,14.7794);
-  // ProtonCentrCut->SetPoint(23,0.0134785,14.1492);
-  // ProtonCentrCut->SetPoint(24,0.0267163,10.3151);
-  // ProtonCentrCut->SetPoint(25,0.0279198,10.105);
-
-  ProtonCentrCut->SetPoint(0,11.4508,109.726);
-   ProtonCentrCut->SetPoint(1,11.3651,180.763);
-   ProtonCentrCut->SetPoint(2,14.3938,255.237);
-   ProtonCentrCut->SetPoint(3,18.5368,373.249);
-   ProtonCentrCut->SetPoint(4,21.0369,460.326);
-   ProtonCentrCut->SetPoint(5,23.7656,576.047);
-   ProtonCentrCut->SetPoint(6,26.4942,769.678);
-   ProtonCentrCut->SetPoint(7,27.7657,949.561);
-   ProtonCentrCut->SetPoint(8,28.3943,1065.28);
-   ProtonCentrCut->SetPoint(9,29.2229,1065.28);
-   ProtonCentrCut->SetPoint(10,31.0373,917.48);
-   ProtonCentrCut->SetPoint(11,33.6231,734.16);
-   ProtonCentrCut->SetPoint(12,36.9375,568.026);
-   ProtonCentrCut->SetPoint(13,41.4234,383.561);
-   ProtonCentrCut->SetPoint(14,45.7664,263.257);
-   ProtonCentrCut->SetPoint(15,49.6666,186.492);
-   ProtonCentrCut->SetPoint(16,55.9097,99.4147);
-   ProtonCentrCut->SetPoint(17,56.9811,73.0624);
-   ProtonCentrCut->SetPoint(18,54.3525,76.4997);
-   ProtonCentrCut->SetPoint(19,49.7808,110.872);
-   ProtonCentrCut->SetPoint(20,44.4949,231.176);
-   ProtonCentrCut->SetPoint(21,39.7662,375.54);
-   ProtonCentrCut->SetPoint(22,36.4946,494.698);
-   ProtonCentrCut->SetPoint(23,33.5659,618.439);
-   ProtonCentrCut->SetPoint(24,31.223,773.116);
-   ProtonCentrCut->SetPoint(25,29.3801,901.44);
-   ProtonCentrCut->SetPoint(26,28.7372,836.132);
-   ProtonCentrCut->SetPoint(27,27.5657,707.808);
-   ProtonCentrCut->SetPoint(28,25.3799,555.423);
-   ProtonCentrCut->SetPoint(29,22.937,436.265);
-   ProtonCentrCut->SetPoint(30,20.294,328.565);
-   ProtonCentrCut->SetPoint(31,18.3939,275.86);
-   ProtonCentrCut->SetPoint(32,16.051,200.241);
-   ProtonCentrCut->SetPoint(33,13.7652,152.119);
-   ProtonCentrCut->SetPoint(34,12.008,118.892);
-   ProtonCentrCut->SetPoint(35,11.4508,109.726);
+#include "cutP/cutP1998_uv.C"
+#include "cutP/cutP1999_d2.C"
+#include "cutP/cutP1999_uv.C"
+#include "cutP/cutP1999_vis.C"
+#include "cutP/cutP2000_fuv.C"
+#include "cutP/cutP2000_uv1.C"
+#include "cutP/cutP2000_uv2.C"
+#include "cutP/cutP2000_vis.C"
+#include "cutP/cutP2001_d.C"
+#include "cutP/cutP2001_uv.C"
+#include "cutP/cutP2002_d2.C"
+#include "cutP/cutP2002_d3.C"
+#include "cutP/cutP2002_uv1.C"
+#include "cutP/cutP2002_uv2.C"
+#include "cutP/cutP2002_vis1.C"
+#include "cutP/cutP2002_vis2.C"
+#include "cutP/cutP2003_vis.C"
+#include "cutP/cutP2005_d2.C"
+#include "cutP/cutP2006_d.C"
 
 
-  return ProtonCentrCut;
+
+TCutG *myProtonCentrCut(string cartella){
+  // cout<<"Il nome della cartella del cut è: "<<cartella<<endl;
+  map<string, TCutG*> ProtonCut;
+  ProtonCut["1998_uv"] = myProtonCentrCut_1998_uv();
+  ProtonCut["1999_d2"] = myProtonCentrCut_1999_d2();
+  ProtonCut["1999_uv"] = myProtonCentrCut_1999_uv();
+  ProtonCut["1999_vis"] = myProtonCentrCut_1999_vis();
+  ProtonCut["2000_fuv"] = myProtonCentrCut_2000_fuv();
+  ProtonCut["2000_uv1"] = myProtonCentrCut_2000_uv1();
+  ProtonCut["2000_uv2"] = myProtonCentrCut_2000_uv2();
+  ProtonCut["2000_vis"] = myProtonCentrCut_2000_vis();
+  ProtonCut["2001_d"] = myProtonCentrCut_2001_d();
+  ProtonCut["2001_uv"] = myProtonCentrCut_2001_uv();
+  ProtonCut["2002_d2"] = myProtonCentrCut_2002_d2();
+  ProtonCut["2002_d3"] = myProtonCentrCut_2002_d3();
+  ProtonCut["2002_uv1"] = myProtonCentrCut_2002_uv1();
+  ProtonCut["2002_uv2"] = myProtonCentrCut_2002_uv2();
+  ProtonCut["2002_vis1"] = myProtonCentrCut_2002_vis1();
+  ProtonCut["2002_vis2"] = myProtonCentrCut_2002_vis2();
+  ProtonCut["2003_vis"] = myProtonCentrCut_2003_vis();
+  ProtonCut["2005_d2"] = myProtonCentrCut_2005_d2();
+  ProtonCut["2006_d"] = myProtonCentrCut_2006_d();
+
+  return ProtonCut[cartella];
 }
 
 TCutG *myPionCentrCut(){
