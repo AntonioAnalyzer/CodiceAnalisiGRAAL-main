@@ -7,6 +7,11 @@ Utilizzo:
   4) utilizzare la funzione ProcessAll ("o.ProcessAll()")
 
 ########################################################################################
+Codice Analisi GRAAL v1.07
+-  Tolti i tagli che identificano i deuteroni in avanti(analisi ancora in corso)
+
+
+########################################################################################
 Codice Analisi GRAAL v1.06
 - aggiunta tagli dei protoni in avanti, differenziati in base al nome della cartella di lavoro.
 - aggiunta tagli eventi di tipo deuterio, differenziati in base al nome della cartella di lavoro.
