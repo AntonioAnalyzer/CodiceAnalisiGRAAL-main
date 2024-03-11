@@ -23,7 +23,6 @@ void Analysis::process(TTree *alb, string root_file, string cartella){
   TCutG *PionCentrCut     = myPionCentrCut();
   TCutG *ProtonForwCut    = myProtonForwCut(cartella);
   TCutG *PionForwCut      = myPionForwCut();
-  TF1 *FitForwDeu = CutDeuForw(cartella);
   
   TF1 *f = CutDeuForw(cartella);
   
@@ -45,7 +44,6 @@ void Analysis::process(TTree *alb, string root_file, string cartella){
   vector<pair<double,double> > fphotonangles;
   // vector<TLorentzVector> fproton;
   vector<TLorentzVector> fneutron;
-  vector<TLorentzVector> fDeuteron;
   
   TLorentzVector beam;
 
@@ -60,7 +58,6 @@ void Analysis::process(TTree *alb, string root_file, string cartella){
   tree->Branch("fneutron",&fneutron);
   tree->Branch("pionangles",    &pionangles);
   tree->Branch("fphotonangles", &fphotonangles);
-  tree->Branch("fDeuteron",&fDeuteron);
 
   if (fChain == 0) return;
   Long64_t nentries = fChain->GetEntriesFast();
@@ -78,7 +75,6 @@ void Analysis::process(TTree *alb, string root_file, string cartella){
     fneutron.clear();
     pionangles.clear();
     fphotonangles.clear();
-    fDeuteron.clear();
 
 
     // if (Cut(ientry) < 0) continue;
@@ -167,25 +163,6 @@ void Analysis::process(TTree *alb, string root_file, string cartella){
                   DIST_WALL = 301.53;
           }
         
-        
-              
-                if(cartella!="2005_d1"){  // non ci sono deuteroni in avanti nei dati contenuti in questa cartella
-                   if(FitForwDeu->Eval(Tof_trf[i])<De_trf[i]){
-                  
-                       double beta = DIST_WALL/(Tof_trf[i]*CLIGHT*1.E-09);
-
-         		   if((1-beta*beta)>0) {
-			     TLorentzVector CandidatefDeuteron;
-			     double gamma = 1./sqrt(1-beta*beta);
-			     double ENE_FDEUTERON = gamma* RMD; //energia totale
-			     double Pfdeu = sqrt(ENE_FDEUTERON*ENE_FDEUTERON-RMD*RMD);
-			     CandidatefDeuteron.SetPxPyPzE(Pfdeu*sin(Theta_trf[i]/180.*M_PI)*cos(Phi_trf[i]/180.*M_PI), Pfdeu*sin(Theta_trf[i]/180.*M_PI)*sin(Phi_trf[i]/180.*M_PI), 			Pfdeu*cos(Theta_trf[i]/180.*M_PI),ENE_FDEUTERON);
-			    fDeuteron.push_back(CandidatefDeuteron); 
-                  
-                           }
-              
-                      }
-		 }
         
      if(cartella!="2005_d1"){  // non ci sono protoni in avanti nei dati contenuti in questa cartella
         if(ProtonForwCut->IsInside(Tof_trf[i], De_trf[i])) { //regno dei protoni in avanti
